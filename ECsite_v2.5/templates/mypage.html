@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>プロフィールページ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/profile.css') }}">
+</head>
+
+<body>
+
+    <div class="profile-page">
+
+        <!-- ===== 左カラム：プロフィール ===== -->
+        <div class="profile-sidebar">
+            <div class="profile-avatar">
+                {% if user.icon %}
+                <img src="{{ url_for('static', filename='icons/' + user.icon) }}" alt="icon">
+                {% else %}
+                <img src="{{ url_for('static', filename='icons/default.png') }}" alt="default icon">
+                {% endif %}
+            </div>
+
+            <h2 class="username">{{ user.username }}</h2>
+            <p class="email">{{ user.email }}</p>
+
+            <a href="{{ url_for('edit_profile') }}" class="edit-btn">プロフィールを編集</a>
+            <a href="{{ url_for('logout') }}" class="logout-btn">ログアウト</a>
+        </div>
+
+
+        <!-- ===== 右カラム：メイン内容 ===== -->
+        <div class="profile-content">
+
+            {% if user.is_admin == 1 %}
+            <div class="admin-section">
+                <h3>管理者メニュー</h3>
+
+                <div class="admin-grid">
+                    <a href="/items" class="admin-card">商品一覧</a>
+                    <a href="/dependencies" class="admin-card">依頼一覧</a>
+                    <a href="/admin/items" class="admin-card">商品管理</a>
+                    <a href="/admin/dependencys" class="admin-card">依頼管理</a>
+                </div>
+            </div>
+            {% else %}
+            <div class="admin-grid">
+                <a href="/items" class="admin-card">商品一覧</a>
+                <a href="/dependencies" class="admin-card">依頼一覧</a>
+                <a href="/cart" class="admin-card">カート一覧</a>
+                <a href="" class="admin-card">閲覧履歴</a>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

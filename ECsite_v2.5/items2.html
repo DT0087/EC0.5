@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>商品一覧</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+</head>
+<body>
+  <h2>{{ session.get('username') }} さん、ようこそ！</h2>
+  <a href="{{ url_for('logout') }}">ログアウト</a>
+
+  <h3>商品一覧</h3>
+  <div style="display:flex; flex-wrap:wrap;">
+    {% for item in items %}
+      <div style="border:1px solid #ccc; padding:10px; margin:10px; width:200px;">
+        <img src="{{ url_for('static', filename=item.image_url) }}" width="150">
+        <strong>{{ item.name }}</strong><br>
+        {{ item.description }}<br>
+        価格: ¥{{ item.price }}<br>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

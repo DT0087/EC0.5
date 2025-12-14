@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>商品一覧</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/items.css') }}">
+</head>
+
+<body>
+
+  <div class="app-container">
+    <header>
+      <div class="logo">この世とあの世をつなぐ</div>
+    </header>
+
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="/items">商品一覧</a>
+      <a href="/dependencies">依頼一覧</a>
+      <a href="/mypage">マイページ</a>
+      <a href="/cart">カート</a>
+    </nav>
+
+
+    <div class="welcome-message">
+      <h2>{{ session.get('username') }} さん、ようこそ！</h2>
+      <!-- template -->
+      <a href="{{ url_for('logout') }}" class="logout-btn">ログアウト</a>
+    </div>
+    <div class="welcome-message">
+      <p>
+        この世とあの世をつなぐ“品々の集い”へようこそ。<br>
+        ここに並ぶものは、ただの商品ではありません。<br>
+        想いを抱えた者同士を結び、必要とする人へ導くための“媒介”です。<br>
+        心に触れる何かと、どうか出会えますように。<br>
+      </p>
+    </div>
+
+
+    <div class="search-bar">
+      <form action="{{ url_for('items_list') }}" method="get">
+        <input type="text" name="q" placeholder="商品を検索" value="{{ keyword }}">
+      </form>
+    </div>
+
+
+    <div class="items-container">
+      <!-- 商品タブ -->
+
+      <div class="tab-content active" id="products-tab">
+        <h3>商品一覧</h3>
+        <div class="items-grid">
+          {% for item in items %}
+          <div class="item-card">
+            <a href="{{ url_for('item_detail', item_id=item.id) }}">
+              <img src="{{ url_for('static', filename=item.image_url) }}" class="item-image">
+              <div class="item-info">
+                <div class="item-name">{{ item.name }}</div>
+                <div class="item-description">{{ item.description }}</div>
+                <div class="item-price">価格：¥{{ item.price }}</div>
+                <!-- 詳細ページへ -->
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+
+          <!-- ▼ 商品登録ボタン ▼ -->
+          <a href="{{ url_for('add_item') }}" class="add-item-btn">
+            ＋ 商品を登録する
+          </a>
+
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      © 2025 この世とあの世をつなぐ
+    </footer>
+  </div>
+
+</body>
+
+</html>

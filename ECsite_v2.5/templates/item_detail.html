@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>商品一覧</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/items.css') }}">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">この世とあの世をつなぐ</div>
+        </header>
+
+        <nav>
+            <a href="/">ホーム</a>
+            <a href="/items">商品一覧</a>
+            <a href="/dependencies">依頼一覧</a>
+            <a href="/mypage">マイページ</a>
+            <a href="/cart">カート</a>
+        </nav>
+
+        <div class="welcome-message">
+            <h2>{{ session.get('username') }} さん、ようこそ！</h2>
+            <a href="{{ url_for('logout') }}" class="logout-btn">ログアウト</a>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="商品を検索">
+        </div>
+
+        <div class="item-detail-container">
+            <h2>{{ item.name }}</h2>
+            <img src="{{ url_for('static', filename=item.image_url) }}" width="200"><br>
+            <p>{{ item.description }}</p>
+            <p>価格：¥{{ item.price }}</p>
+
+            <a href="{{ url_for('add_to_cart', item_id=item.id) }}">
+                <button>カートに追加</button>
+            </a>
+            <!--商品一覧頁に戻る-->
+            <div style="margin-top:20px;">
+                <a href="{{ url_for('items_list') }}">← 商品一覧に戻る</a>
+            </div>
+            
+            
+        </div>
+
+
+        <footer>
+            © 2025 この世とあの世をつなぐ
+        </footer>
+    </div>
+
+    
+
+</body>
+
+</html>

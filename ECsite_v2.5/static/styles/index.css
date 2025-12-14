@@ -1,0 +1,248 @@
+/* ====== 基本レイアウト ====== */
+body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f6f6f6;
+    background-image: url('../images/hew image1.png');
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.1rem;
+  background-color: #20232a;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+/* ====== BGMボタン ====== */
+.bgm_button {
+    margin-top: 10px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+.bgm_button p {
+    color: white;
+    margin: 0 0 4px 0;
+    font-size: 0.9rem;
+}
+/* ====== 固定幅コンテナ ====== */
+.app-container {
+    border-radius: 4px;
+    margin-left: 40%;
+    width: 450px;
+    background: #fff;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* ====== Loading画面 ====== */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+  overflow: hidden;
+}
+
+#loading-screen.ready {
+  cursor: pointer;
+}
+
+#loading-screen.fade-out {
+  opacity: 0;
+}
+
+/* 全画面画像を表示する */
+.loading-img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  animation: fadeInImg 1s forwards;
+}
+
+@keyframes fadeInImg {
+  to { opacity: 1; }
+}
+
+/* 画像上の文字：中央配置 */
+.loading-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+  opacity: 0;
+  transition: opacity 1s ease-in-out 0.5s; /* 画像表示後に文字が出る */
+  pointer-events: none;
+}
+
+/* メイン画面フェードイン */
+#appContent {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+#appContent.fade-in {
+  opacity: 1;
+}
+
+
+
+/* ====== 横並びナビバー ====== */
+.top-nav {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 8px 12px;
+}
+
+.top-nav a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.top-nav a:hover {
+  opacity: 0.7;
+}
+
+
+/* ====== 三角形ゾーン ====== */
+.triangle-zone {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+    font-size: clamp(16px, 4vw, 24px);
+    padding: 20px;
+    transition: opacity 0.2s;
+}
+
+.triangle-zone a {
+    text-decoration: none;
+}
+
+.triangle {
+    margin: 4px;
+    height: 200px;
+    position: relative;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.triangle:hover {
+    transform: scale(1.05);
+}
+
+/* 色 */
+.t1 { background: #83b2ef; }
+.t2 { 
+    background: #83b2ef; 
+    margin-top: -50px;
+}
+.t3 { 
+    background: #83b2ef; 
+    margin-top: -50px;
+  }
+.t4 { background: #83b2ef; }
+.t5 { background: #83b2ef; }
+.t6 { background: #83b2ef; }
+
+/* 形 */
+.triangle.t1 { clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%); }
+.triangle.t2 { clip-path: polygon(0 25%, 100% 0, 100% 100%, 0% 75%); }
+.triangle.t3 { clip-path: polygon(0 0, 100% 25%, 100% 100%, 0% 100%); }
+.triangle.t4 { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+.triangle.t5 { clip-path: polygon(0 25%, 100% 0, 100% 100%, 0% 100%); }
+.triangle.t6 { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%); }
+
+/* ====== フッター ====== */
+footer {
+    background: #20232a;
+    color: #ccc;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8rem;
+}
+
+/* ====== フォームデザイン ====== */
+.form-container {
+    flex: 1;
+    padding: 20px;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.submit-btn {
+    margin-top: 5px;
+    width: 100%;
+    padding: 12px;
+    background: #20232a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.submit-btn:hover {
+    background: #3e4148;
+}
+
+.flash.error {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.flash.success {
+    color: green;
+    margin-bottom: 10px;
+}

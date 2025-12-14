@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>商品一覧</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/items.css') }}">
+</head>
+
+<body>
+
+  <div class="app-container">
+    <header>
+      <div class="logo">この世とあの世をつなぐ</div>
+    </header>
+
+    <nav>
+      <a href="/">ホーム</a>
+      <a href="/items">商品一覧</a>
+      <a href="/dependencies">依頼一覧</a>
+      <a href="/mypage">マイページ</a>
+      <a href="/cart">カート</a>
+
+    </nav>
+
+    <div class="welcome-message">
+      <h2>{{ session.get('username') }} さん、ようこそ！</h2>
+      <a href="{{ url_for('logout') }}" class="logout-btn">ログアウト</a>
+    </div>
+    <div class="welcome-message">
+        <p>
+          この世とあの世の間にある“依頼の門”へようこそ。<br>
+          あなたの想いをここに記せば、必要とする相手へと届きます。<br>
+          言葉にしづらい願いごとも、静かに受け止めます。<br>
+        </p>
+    </div>
+
+
+    <div class="search-bar">
+      <form action="{{ url_for('items_list') }}" method="get">
+        <input type="text" name="q" placeholder="商品を検索" value="{{ keyword }}">
+      </form>
+    </div>
+
+    <div class="items-container">
+      <h3>依頼一覧</h3>
+
+      <div class="items-grid">
+
+        {% if dependencies %}
+        {% for d in dependencies %}
+        <div class="item-card">
+          <a href="{{ url_for('dependency_detail', dependency_id=d.id) }}">
+            <img src="{{ url_for('static', filename=d.image_url) }}" class="item-image">
+
+            <div class="item-info">
+              <div class="item-name">{{ d.name }}</div>
+              <div class="item-description">{{ d.description }}</div>
+              <div class="item-price">料金：¥{{ d.price }}</div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>まだ依頼は登録されていません。</p>
+        {% endif %}
+        <!-- ▼ 依頼登録ボタン ▼ -->
+        <a href="{{ url_for('add_dependency') }}" class="add-item-btn">
+          ＋ 依頼を登録する
+        </a>
+      </div><!-- items-grid -->
+    </div><!-- items-container -->
+    <footer>
+      © 2025 この世とあの世をつなぐ
+    </footer>
+  </div><!-- app-container -->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>商品管理（管理者）</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/items.css') }}">
+</head>
+
+<body>
+
+  <div class="app-container">
+    <header>
+      <div class="logo">この世とあの世をつなぐ</div>
+    </header>
+
+    <nav id="navMenu">
+      <a href="/">ホーム</a>
+      <a href="/admin/dependencys">依頼管理</a>
+      <a href="/mypage">マイページ</a>
+      <a href="/cart">カート</a>
+    </nav>
+
+    <div class="welcome-message">
+      <h2>管理者メニュー：商品管理</h2>
+      <a href="{{ url_for('logout') }}" class="logout-btn">ログアウト</a>
+    </div>
+
+    <div class="items-container">
+      <h3>商品一覧（管理者）</h3>
+
+      <div class="items-grid">
+        {% for item in items %}
+        <div class="item-card">
+          <img src="{{ url_for('static', filename=item.image_url) }}" class="item-image">
+
+          <div class="item-info">
+            <div class="item-name">{{ item.name }}</div>
+            <div class="item-description">{{ item.description }}</div>
+            <div class="item-price">価格：¥{{ item.price }}</div>
+          </div>
+
+          <div style="margin-top: 10px; text-align: center;">
+            <a href="/admin/item/edit/{{ item.id }}">
+              <button style="padding: 5px 12px; margin-right:5px;">編集</button>
+            </a>
+
+            <a href="/admin/item/delete/{{ item.id }}"
+               onclick="return confirm('本当に削除しますか？');">
+              <button style="padding: 5px 12px; background:#d9534f; color:white;">
+                削除
+              </button>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+
+        <a href="{{ url_for('add_item') }}">
+          <button class="add-item-btn">＋ 商品を登録する</button>
+        </a>
+
+      </div>
+    </div>
+
+    <footer>
+      © 2025 この世とあの世をつなぐ App
+    </footer>
+
+  </div>
+
+</body>
+
+</html>

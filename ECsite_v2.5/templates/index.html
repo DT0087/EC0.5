@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+</head>
+
+<body>
+
+  <!-- BGM 音源 -->
+  <audio id="bgm" src="{{ url_for('static', filename='BGM/最後は初めて.mp3') }}" loop></audio>
+
+  <!-- 再生・停止ボタン -->
+  <div class="bgm_button">
+    <p>最後は初めて.mp3</p>
+    <button onclick="document.getElementById('bgm').play()">🎵 再生</button>
+    <button onclick="document.getElementById('bgm').pause()">⏸ 停止</button>
+  </div>
+  <!-- ▼▼▼ ローディング画面 ▼▼▼ -->
+  <div id="loading-screen">
+    <div class="loading-wrapper">
+      <img src="{{ url_for('static', filename='images/loading.png') }}" class="loading-img">
+      <p class="loading-text">あります！</p>
+    </div>
+  </div>
+  <!-- ▲▲▲ ローディング画面 ▲▲▲ -->
+
+
+
+  <div class="app-container" id="appContent">
+    <header>
+      <div class="logo">この世とあの世をつなぐ</div>
+      <nav class="top-nav">
+        <a href="{{ url_for('login') }}">ログイン</a>
+        <a href="{{ url_for('register') }}">新規会員登録</a>
+      </nav>
+    </header>
+
+    <h1>ようこそ</h1>
+
+    <div class="triangle-zone">
+      <a href="/items">
+        <div class="triangle t1">商品一覧ページ</div>
+      </a>
+      <a href="/dependencies">
+        <div class="triangle t2">依頼一覧ページ</div>
+      </a>
+      <a href="/mypage">
+        <div class="triangle t3">マイページ</div>
+      </a>
+      <a href="/cart">
+        <div class="triangle t4">カート</div>
+      </a>
+    </div>
+
+    <footer>
+      © 2025 この世とあの世をつなぐ
+    </footer>
+  </div>
+
+  <script>
+    // ロード後しばらく待って → クリック可能状態にする
+    window.addEventListener("load", () => {
+      const loading = document.getElementById("loading-screen");
+      const loadingText = document.querySelector(".loading-text");
+
+      // 2.5秒後に「クリックして続行」を表示
+      setTimeout(() => {
+        loading.classList.add("ready");
+        loadingText.style.opacity = "1";
+      }, 2500);
+
+      // クリックされたらフェードアウト → メイン画面フェードイン
+      loading.addEventListener("click", () => {
+        if (!loading.classList.contains("ready")) return;
+
+        loading.classList.add("fade-out");
+        document.getElementById("appContent").classList.add("fade-in");
+
+        setTimeout(() => {
+          loading.style.display = "none";
+        }, 800);
+      });
+    });
+  </script>
+
+</body>
+
+</html>

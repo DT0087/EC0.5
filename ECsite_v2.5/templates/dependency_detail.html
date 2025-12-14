@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>依頼詳細</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/items.css') }}">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">この世とあの世をつなぐ</div>
+        </header>
+
+        <nav >
+            <a href="/">ホーム</a>
+            <a href="/items">商品一覧</a>
+            <a href="/dependencies">依頼一覧</a>
+            <a href="/mypage">マイページ</a>
+            <a href="/cart">カート</a>
+        </nav>
+
+        <div class="welcome-message">
+            <h2>{{ session.get('username') }} さん、ようこそ！</h2>
+            <a href="{{ url_for('logout') }}" class="logout-btn">ログアウト</a>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="商品を検索">
+        </div>
+
+        <div class="item-detail-container">
+            <h2>{{ dependency.name }}</h2>
+            <img src="{{ url_for('static', filename=dependency.image_url) }}" width="200"><br>
+            <p>{{ dependency.description }}</p>
+            <p>料金：¥{{ dependency.price }}</p>
+
+            <a href="{{ url_for('add_dependency_to_cart', dependency_id=dependency.id) }}" class="cart-btn">
+                <button>カートに追加</button>
+            </a>
+
+
+            <!--itemsページの依頼一覧タブに戻るリンク-->
+            <div style="margin-top:20px;">
+                <a href="{{ url_for('dependencies_list') }}">← 依頼一覧に戻る</a>
+            </div>
+            
+        </div>
+
+        <footer>
+            © 2025 Test App
+        </footer>
+    </div>
+
+
+</body>
+
+</html>

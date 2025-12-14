@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>依頼管理（管理者）</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/items.css') }}">
+</head>
+
+<body>
+
+  <div class="app-container">
+    <header>
+      <div class="logo">この世とあの世をつなぐ</div>
+    </header>
+
+    <nav id="navMenu">
+      <a href="/">ホーム</a>
+      <a href="/admin/items">商品管理</a>
+      <a href="/mypage">マイページ</a>
+      <a href="/cart">カート</a>
+    </nav>
+
+    <div class="welcome-message">
+      <h2>管理者メニュー：依頼管理</h2>
+      <a href="{{ url_for('logout') }}" class="logout-btn">ログアウト</a>
+    </div>
+
+    <div class="items-container">
+      <h3>依頼一覧（管理者）</h3>
+
+      <div class="items-grid">
+        {% for dependency in dependencies %}
+        <div class="item-card">
+          <img src="{{ url_for('static', filename=dependency.image_url) }}" class="item-image">
+
+          <div class="item-info">
+            <div class="item-name">{{ dependency.name }}</div>
+            <div class="item-description">{{ dependency.description }}</div>
+            <div class="item-price">価格：¥{{ dependency.price }}</div>
+          </div>
+
+          <!-- ▼ 管理者向け 操作ボタン ▼ -->
+          <div style="margin-top: 10px; text-align: center;">
+            <a href="/admin/dependency/edit/{{ dependency.id }}">
+              <button style="padding: 5px 12px; margin-right:5px;">編集</button>
+            </a>
+
+            <a href="/admin/dependency/delete/{{ dependency.id }}"
+               onclick="return confirm('本当に削除しますか？');">
+              <button style="padding: 5px 12px; background:#d9534f; color:white;">
+                削除
+              </button>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+
+        <!-- ▼ 商品新規登録ボタン ▼ -->
+        <a href="{{ url_for('add_dependency') }}">
+          <button class="add-item-btn">＋ 依頼を登録する</button>
+        </a>
+
+      </div>
+    </div>
+
+    <footer>
+      © 2025 この世とあの世をつなぐ App
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById("menuBtn").addEventListener("click", () => {
+      document.querySelector(".app-container").classList.toggle("open");
+    });
+  </script>
+
+</body>
+
+</html>

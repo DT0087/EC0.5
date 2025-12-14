@@ -1,0 +1,208 @@
+/* ====== 全体レイアウト ====== */
+body {
+    margin: auto;
+    height: 100%;
+    font-family: "Segoe UI", sans-serif;
+    width: 80%;
+    text-align: center;
+    background: #f1f3f5;
+}
+
+.profile-page {
+    display: flex;
+    max-width: 1000px;
+    margin: 30px auto;
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+
+/* ====== 左サイドバー ====== */
+.profile-sidebar {
+    width: 280px;
+    background: #20232a;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.profile-avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #fff;
+    border: 3px solid #fff;
+}
+
+.username {
+    margin-top: 15px;
+    font-size: 1.4rem;
+}
+
+.email {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+/* ボタン */
+.edit-btn,
+.logout-btn {
+    display: block;
+    margin: 12px auto;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.edit-btn {
+    background: #3b82f6;
+}
+
+.edit-btn:hover {
+    background: #2563eb;
+}
+
+.logout-btn {
+    background: #ef4444;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+}
+
+
+/* ====== 右カラム ====== */
+.profile-content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* ====== 管理者カード ====== */
+.admin-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.admin-card {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #e2e8f0;
+    transition: 0.2s;
+}
+
+.admin-card:hover {
+    background: #e2e8f0;
+}
+
+/* ====== ユーザー商品・依頼 ====== */
+.user-section {
+    margin-top: 35px;
+}
+
+.user-section h3 {
+    border-left: 5px solid #3b82f6;
+    padding-left: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.user-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.item-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.item-card:hover {
+    background: #f8fafc;
+}
+/* ===== プロフィール編集ページ ===== */
+
+.edit-page {
+    max-width: 500px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.edit-page h2 {
+    margin-bottom: 20px;
+}
+
+.current-icon img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="email"],
+.edit-form input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.save-btn {
+    background: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    display: inline-block;
+    margin-top: 10px;
+    color: #333;
+}
+
+
+/* ====== スマホ対応 ====== */
+@media (max-width: 850px) {
+    .profile-page {
+        flex-direction: column;
+    }
+
+    .profile-sidebar {
+        width: 100%;
+    }
+}

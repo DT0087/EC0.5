@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>商品追加フォーム</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/items.css') }}">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">この世とあの世をつなぐ</div>
+        </header>
+
+        <nav>
+            <a href="/">ホーム</a>
+            <a href="/items">商品一覧</a>
+            <a href="/dependencies">依頼一覧</a>
+            <a href="/mypage">マイページ</a>
+            <a href="/cart">カート</a>
+        </nav>
+
+        <div class="welcome-message">
+            <h2>{{ session.get('username') }} さん、ようこそ！</h2>
+            <a href="{{ url_for('logout') }}">ログアウト</a>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="商品を検索">
+        </div>
+
+        <form class="form_cart" action="{{ url_for('add_item') }}" method="post" enctype="multipart/form-data">
+             <h2>商品登録</h2>
+            <div class="form_group">
+                <label>商品名:</label> 
+                <input type="text" name="name" required>
+            </div>
+
+            <div class="form_group">
+            <label>説明: </label>
+            <textarea name="description" required></textarea>
+            </div>
+
+
+            <div class="form_group">
+                <label>価額：</label>
+                <input type="number" name="price" required>
+            </div>
+            
+            <div class="form_group">
+                <label>画像：</label>
+                <input type="file" name="image">
+            </div>
+            <button type="submit">登録する</button>
+        </form>
+
+        <a class="back_link" href="{{ url_for('items_list') }}">← 商品一覧に戻る</a>
+
+
+        <footer>
+            © 2025 この世とあの世をつなぐ
+        </footer>
+    </div>
+
+    
+</body>
+
+</html>

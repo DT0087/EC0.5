@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>決済ページ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/items.css') }}">
+</head>
+
+<body>
+
+    <div class="checkout-container">
+
+        <h2>購入手続き</h2>
+
+        <div class="summary-box">
+            <h3>購入内容</h3>
+            <ul>
+                {% for item in items %}
+                <li>{{ item.name }} - ¥{{ item.price }}</li>
+                {% endfor %}
+
+                {% for dep in dependencies %}
+                <li>{{ dep.name }} - ¥{{ dep.price }}</li>
+                {% endfor %}
+            </ul>
+
+            <div class="total">
+                合計金額：<strong>¥{{ total_price }}</strong>
+            </div>
+        </div>
+
+        <form action="{{ url_for('process_payment') }}" method="post" class="payment-form">
+            <h3>お支払い情報</h3>
+            <label>カード名義人：</label>
+            <input type="text" name="card_name" required>
+
+            <label>カード番号：</label>
+            <input type="text" name="card_number" placeholder="※テスト用ダミー番号" required>
+
+            <label>有効期限：</label>
+            <input type="text" name="expiry" placeholder="MM/YY" required>
+
+            <label>セキュリティコード：</label>
+            <input type="text" name="cvc" required>
+
+            <button type="submit" class="pay-btn">支払う</button>
+        </form>
+
+
+        <a href="{{ url_for('show_cart') }}" class="back-link">← カートに戻る</a>
+
+    </div>
+
+</body>
+
+</html>

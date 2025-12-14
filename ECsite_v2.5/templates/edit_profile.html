@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>プロフィール編集</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/profile.css') }}">
+</head>
+<body>
+
+<div class="edit-page">
+
+    <h2>プロフィール編集</h2>
+
+    <form action="{{ url_for('edit_profile') }}" method="post" enctype="multipart/form-data" class="edit-form">
+
+        <!-- 現在のアイコン -->
+        <div class="current-icon">
+            {% if user.icon %}
+                <img src="{{ url_for('static', filename='icons/' + user.icon) }}" alt="icon">
+            {% else %}
+                <img src="{{ url_for('static', filename='icons/default.png') }}" alt="default icon">
+            {% endif %}
+        </div>
+
+        <!-- アイコン変更 -->
+        <label>アイコン画像を変更：</label>
+        <input type="file" name="icon">
+
+        <!-- 名前 -->
+        <label>ユーザー名：</label>
+        <input type="text" name="username" value="{{ user.username }}" required>
+
+        <!-- メール -->
+        <label>メールアドレス：</label>
+        <input type="email" name="email" value="{{ user.email }}" required>
+
+        <button type="submit" class="save-btn">保存</button>
+        <a href="{{ url_for('mypage') }}" class="cancel-btn">キャンセル</a>
+    </form>
+
+</div>
+
+</body>
+</html>
